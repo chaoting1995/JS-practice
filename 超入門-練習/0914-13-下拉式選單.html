@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+    <section>
+      <form id="form">
+          <select name="select">
+              <option value=""></option>
+          </select>
+      </form>
+    </section>
+
+
+    <script>
+
+        let countdown = function (due) {
+            let now = new Date();
+
+            let rest = due.getTime() - now.getTime();
+            let sec = Math.floor(rest / 1000 % 60);
+            let min = Math.floor(rest / 1000 / 60) % 60;
+            let hours = Math.floor(rest / 1000 / 60 / 60) % 24;
+            let days = Math.floor(rest / 1000 / 60 / 60 / 24);
+            let count = [days, hours, min, sec];
+
+            return count;
+        }
+        let goal = new Date();
+        goal.setHours(23);
+        goal.setMinutes(59);
+        goal.setSeconds(59);
+
+        console.log(countdown(goal));
+
+        let recalculate = function () {
+            let counter = countdown(goal);
+            let time = `${counter[1]}小時 ${counter[2]}分 ${counter[3]}秒`
+            document.getElementById('timer').textContent = time;
+            refresh();
+        }
+        let refresh = function () {
+            setTimeout(recalculate, 1000);
+        }
+        recalculate();
+    </script>
+</body>
+
+</html>

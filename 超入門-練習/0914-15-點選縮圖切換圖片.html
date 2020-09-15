@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>
+        section img {
+            max-width: 100%;
+
+        }
+
+        .center {
+            margin: 0 auto 0 auto;
+            width: 50%;
+        }
+
+        ul {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            float: left;
+            margin-right: 1%;
+            width: 24%;
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <section>
+        <div class="center">
+            <div>
+                <img src="../img/slide1.jpg" id="big_img">
+            </div>
+            <ul>
+                <li><img src="../img/slide1.jpg" class="thumb" data-image="../img/slide1.jpg"></li>
+                <li><img src="../img/slide2.jpg" class="thumb" data-image="../img/slide2.jpg"></li>
+                <li><img src="../img/slide3.jpg" class="thumb" data-image="../img/slide3.jpg"></li>
+                <li><img src="../img/slide4.jpg" class="thumb" data-image="../img/slide4.jpg"></li>
+            </ul>
+        </div>
+    </section>
+
+
+    <script>
+        let thumbs = document.querySelectorAll('.thumb');
+        for (let i = 0; i < thumbs.length; i++) {
+            thumbs[i].onclick = function () {
+                console.log(this.dataset.image);
+                document.getElementById('big_img').src = this.dataset.image;
+            };
+        }
+    </script>
+</body>
+
+</html>

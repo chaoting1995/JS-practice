@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <section>
+        <p>最後連線的日期時間：<span id="time"></span></p>
+        <p>最後連線的日期時間：<span id="time_2"></span></p>
+    </section>
+    
+    <script>
+let now = new Date();
+let year = now.getFullYear();
+let month = now.getMonth();
+let date = now.getDate();
+let hour = now.getHours();
+let min = now.getMinutes();
+
+let output = `${year} / ${month+1} / ${date}    ${hour}：${min}`
+document.getElementById('time').textContent = output;
+
+let am_pm ='';
+if(hour<12){
+    am_pm='a.m.';
+}else{
+    am_pm='p.m.';
+}
+let output_2 = `${year} / ${month+1} / ${date}    ${hour%12}：${min} ${am_pm}`;
+
+document.getElementById('time_2').textContent = output_2;
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

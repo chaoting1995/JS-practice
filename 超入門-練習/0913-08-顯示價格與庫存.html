@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td id="title"></td>
+            <td id="price"></td>
+            <td id="stock"></td>
+        </tr>
+    </table>
+
+    <script>
+        // 有點無聊，練object而已，先跳過
+
+        let js_book = {
+            title: 'JS入門',
+            price: 500,
+            stock: 3
+        };
+        // 讀取
+        console.log(js_book);
+        console.log(js_book.title);
+        console.log(js_book['price']);
+
+        // 改寫
+        js_book['price'] = 10;
+        console.log(js_book);
+
+        // 讀取全部
+        for(let p in js_book){
+            console.log(`${p} = ${js_book[p]}`)
+        }
+
+        // 輸出html
+        document.getElementById('title').textContent = js_book['price'];
+        document.getElementById('price').textContent = js_book['title'] +'元';
+        document.getElementById('stock').textContent = js_book['stock'];
+    </script>
+
+</body>
+
+</html>

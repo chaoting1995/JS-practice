@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <script>
+        let enemy = 100;
+        let attack;
+        alert('戰鬥開始!')
+        while(enemy>0){
+            attack = Math.floor(Math.random()*31);
+            console.log(`怪獸受到${attack}點的傷害`);
+            enemy = enemy-attack;
+        }
+        console.log('打倒怪獸了!');
+
+
+
+//真無聊，不能打慢點嗎XD
+    </script>
+
+</body>
+
+</html>

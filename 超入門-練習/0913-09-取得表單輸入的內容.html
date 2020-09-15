@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <section>
+        <!-- form會把資料送到action屬性指定的網址，呈現在網址?後面 -->
+        <form action="#" id="form">
+            <input type="text" name="word">
+            <input type="submit" value="搜尋" >
+            
+            
+        </form>
+        <p id="output"></p>
+    </section>
+    
+    <script>
+        document.getElementById('form').onsubmit = function () {
+            console.log('已按下搜尋按鈕');
+            let search = document.getElementById('form').word.value;
+            // 取得name為word的input的value
+            // value，即為使用者輸入內容!!!!
+            
+            document.getElementById('output').textContent = `「${search}」搜尋中...`
+        return false;
+        // 問題：按下送出鍵，會重整頁面
+        // 解決：return false; 中斷表單送出動作
+        };
+
+
+
+
+    </script>
+
+</body>
+
+</html>

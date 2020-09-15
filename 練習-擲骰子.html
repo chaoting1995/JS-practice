@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+</head>
+
+<body>
+    <!-- 骰子圖片何來???? -->
+    <div id="dice" style="font-size: 100px; color:blue"><i class="fas fa-dice-one"></i></div>
+    <h1 id="point">5點</h1>
+    <button id="start">開始</button>
+    <script>
+        // 照慣例來個獲取節點的API
+        const byId = (id) => document.getElementById(id)
+        // 按鈕事件監聽，中規中矩
+        byId('start').addEventListener('click', function () {
+
+            // Math.random()：0<= x <1 的亂數
+            // Math.floor()：比x小的最大整數
+            // 最小 0*6+1=1 ; 最大 [floor(0.99*6=5.94)=5]+1=6
+            //能隨機生成1,2,3,4,5,6其一
+            // 方法的()不能少!!!!!!!!!!!!
+            const rand = Math.floor(Math.random() * 6) + 1
+
+            byId('point').innerHTML = rand + ' 點'
+            // 要的是字串!!!!!!!!!!!
+            const points = ['one', 'two', 'three', 'four', 'five', 'six']
+            // 預設為<i class="fas fa-dice-one"></i>，配合random結果「抽換」圖片
+            // 陣列points[i]，陣列從0開始，故要rand - 1
+            byId('dice').innerHTML = '<i class="fas fa-dice-' + points[rand - 1] + '"></i>'
+
+        })
+    </script>
+</body>
+
+</html>
+
+<!-- 如何取a~b的隨機整數???? -->

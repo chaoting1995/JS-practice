@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+    <section>
+        <h2>歌單歌單歌單歌單歌單歌單歌單歌單歌單</h2>
+        <div id="list"></div>
+    </section>
+    
+
+    <script>
+        let addZero = function (num, digit) {
+            let num_string = String(num);
+            while (num_string.length < digit) {
+                num_string = `0${num_string}`;
+            }
+            return num_string;
+        }
+
+        let songs = [
+            'aaaaaaaa', 'bbbbbbbb', 'cccccccc', 'dddddddd', 'eeeeeeee', 'ffffffff', 'gggggggg', 'hhhhhhhh', 'iiiiiiii', 'jjjjjjjj','kkkkkkkk','llllllll'
+        ];
+
+        for (let i = 0; i < songs.length; i++) {
+            let paragraph = document.createElement('p');
+            paragraph.textContent = `${addZero(i + 1, 2)}.${songs[i]}`;
+            document.getElementById('list').appendChild(paragraph);
+        }
+
+    </script>
+
+</body>
+
+</html>

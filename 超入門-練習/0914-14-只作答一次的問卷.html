@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+    <section>
+<p>您會去電影院看電影嗎?</p>
+<form action="0914-14-thankyou.html" >
+    <input type="radio" name="frequency">每周1次以上<br>
+    <input type="radio" name="frequency">每個月1次左右<br>
+    <input type="radio" name="frequency">每年會去個幾次<br>
+    <input type="radio" name="frequency">幾乎不去<br>
+
+    <input type="submit" name="送出" id="submit">
+</form>
+    </section>
+
+
+    <script>
+        let thumbs = document.querySelectorAll('.thumb');
+        for (let i = 0; i < thumbs.length; i++) {
+            thumbs[i].onclick = function () {
+                console.log(this.dataset.image);
+                document.getElementById('big_img').src = this.dataset.image;
+            };
+        }
+
+
+        // 要引用檔案，先放棄
+    </script>
+</body>
+
+</html>

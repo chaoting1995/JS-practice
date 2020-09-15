@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>
+        .slide {
+            margin: 0 auto;
+            border: 1px solid black;
+            width: 720px;
+            background-color: black;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .toolbar {
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .nav {
+            display: inline-block;
+        }
+
+        #prev {
+            float: left;
+            width: 40px;
+            height: 40px;
+            background: url(../img/slide1.jpg) no-repeat;
+        }
+
+        #next {
+            float: left;
+            width: 40px;
+            height: 40px;
+            background: url(../img/slide2.jpg) no-repeat;
+        }
+
+        #page {
+            display: inline-block;
+            float: left;
+            margin-top: 8px;
+            height: 32px;
+            color: white;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <section>
+        <div class="slide">
+            <div class="image_box">
+                <img id="main_image" src="../img/slide1.jpg">
+            </div>
+            <div class="toolbar">
+                <div class="nav">
+                    <div id="prev"></div>
+                    <span id="page"></span>
+                    <div id="next"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+
+        let images = ['../img/slide1.jpg', '../img/slide2.jpg', '../img/slide3.jpg', '../img/slide4.jpg', '../img/slide5.jpg'];
+        let current = 0;
+        let page_num = function () {
+            document.getElementById('page').textContent = `${current + 1} / ${images.length}`;
+        }
+        let change_image = function () {
+            if (current + num >= 0 && current + num < images.length) {
+                current += num;
+                document.getElementById(main_image).scr = images[current];
+                page_num;
+            }
+        };
+
+let preload_image = function(path){
+    let img_tag = document.createElement('img');
+    img_tag.src = path;
+}
+for (let i = 0; i < array.length; i++) {
+    preload_image(images[i]);
+}
+        page_num();
+        
+        document.getElementById('prev').onclick = function () {
+            change_image(-1);
+        };
+        document.getElementById('next').onclick = function () {
+            change_image(1);
+        };
+    </script>
+</body>
+
+</html>

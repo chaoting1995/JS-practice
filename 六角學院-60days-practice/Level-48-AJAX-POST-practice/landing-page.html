@@ -11,7 +11,6 @@
         /* * {
             outline: auto;
         } */
-
     </style>
 </head>
 
@@ -62,7 +61,8 @@
                             <input type="password" class="form-control" id="login_password" name="login_password">
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-warning m-2 text-white">submit</button>
+                            <button type="button" class="btn btn-warning m-2 text-white"
+                                id="login_submit">submit</button>
                             <button type="button" id="login_auto" class="btn btn-info m-2">AutoText</button>
                         </div>
                     </form>
@@ -71,13 +71,18 @@
             </div>
         </div>
 
-        <!-- report -->
+
         <div class="row d-flex justify-content-center">
             <div class="col-8" style="border-radius: 10px;">
                 <div class="card-body">
+                    <!-- report -->
                     <h4 id="report_system" class="text-center text-danger"></h4>
                     <h4 id="report_account" class="text-center text-danger"></h4>
                     <h4 id="report_password" class="text-center text-danger"></h4>
+                    <!-- remember -->
+                    <h4 id="remember_system" class="text-center text-warning"></h4>
+                    <h4 id="remember_account" class="text-center text-warning"></h4>
+                    <h4 id="remember_password" class="text-center text-warning"></h4>
                 </div>
             </div>
         </div>
@@ -102,11 +107,16 @@
 
         // Report
         // 回報寫在一起
-        let report_signup = qs('#report_signup')
-        let report_login = qs('#report_login')
+        // let report_signup = qs('#report_signup')
+        // let report_login = qs('#report_login')
+        let report_system = qs('#report_system')
         let report_account = qs('#report_account')
         let report_password = qs('#report_password')
-        let report_system = qs('#report_system')
+
+        //Remember  
+        let remember_system = qs('#remember_system')
+        let remember_account = qs('#remember_account')
+        let remember_password = qs('#remember_password')
 
 
         /* 定義測試資料 */
@@ -118,12 +128,31 @@
             password: ''
         }
 
-        /* 快速填寫 */
-        const addText = () => {
-            signup_account.value = "chaoting@hexschool.com";
-            signup_password.value = "12345678";
+        /* 設定快速填寫 */
+        // 註冊
+        const addText_signup = () => {
+            signup_account.value = "chaoting13@test.com";
+            signup_password.value = "aa12345678";
         };
-        signup_auto.addEventListener("click", addText);
+        signup_auto.addEventListener("click", addText_signup);
+
+        let remember_data = {
+            email: '',
+            password: ''
+        }
+
+        // 登入
+        const addText_login = () => {
+            if (report_system.innerHTML == "帳號註冊成功" || report_system.innerHTML == "此帳號已被使用") {
+                //從remember撈取帳密，塞入登入表格
+                login_account.value = remember_data.email
+                login_password.value = remember_data.password
+            } else {
+                login_account.value = "chaoting13@test.com";
+                login_password.value = "aa12345678";
+            }
+        };
+        login_auto.addEventListener("click", addText_login);
 
         // 設定送出資料的方式
         const fetch_post = (api, data) => {
@@ -134,7 +163,7 @@
                 },
                 method: 'POST',
             })
-         // 設定資料回來後發生的事
+                // 設定資料回來後發生的事
                 .then(res => {
                     return res.json();
                 })
@@ -142,38 +171,112 @@
                     console.log(res);
                     // 回報
                     report_system.innerHTML = res.message;
-                    // if (res.message == "帳號註冊成功" || res.message == "此帳號已被使用") {
-                    // //秀出帳密
-                    // report_account.innerHTML = `帳號:${signup_account.value} `
-                    // report_password.innerHTML = `密碼:${signup_password.value}`
-                    // }
+                    if (res.message == "帳號註冊成功" || res.message == "此帳號已被使用") {
+                        //秀出帳密
+                        remember_system.innerHTML = '幫你記住'
+                        remember_account.innerHTML = `帳號:${signup_account.value} `
+                        remember_password.innerHTML = `密碼:${signup_password.value}`
+                    }
+                    //每次送出，都要清空表格與回報訊息
+                    cleanData()
                 })
                 .catch((err) => {
                     console.log('錯誤:', err);
                 });
         }
-        
-        /* 檢查資料格式 */
-        // 檢查 Email
-        
-        
-        // 檢查 Password
-        
-        /* 清除資料 */
+
+        /* 設定資料格式檢查 */
+        // 設定 Email檢查
+        const check_email = (value) => {
+            if (value === '') {
+                report_account.innerHTML = 'Email不能為空'
+                return true
+            } else if (value.match(/[@]+/) === null) {
+                report_account.innerHTML = 'Email必須包含 @符號'
+                return true
+            } else if (value.match(/[.]+/) === null) {
+                report_account.innerHTML = 'Email格式錯誤'
+                return true
+            } else {
+                report_account.innerHTML = ''
+                return false
+            }
+        }
+
+
+        // 設定 Password檢查
+        const check_password = (value) => {
+            if (value === '') {
+                report_password.innerHTML = '密碼不能為空'
+                return true
+            } else if (value.match(/[a-zA-Z]+/) === null || value.match(/[0-9]+/) === null) {
+                report_password.innerHTML = '密碼需包含英數'
+                return true
+            } else {
+                report_password.innerHTML = ''
+                return false
+            }
+        }
+        /* 設定資料清除器 */
+        const cleanData = () => {
+            user_data = {}  //清空物件
+            signup_account.value = ''   //清空表格
+            signup_password.value = ''  //清空表格
+            login_account.value = ''   //清空表格
+            login_password.value = ''  //清空表格
+            report_account.innerHTML = ''  //清空回報
+            report_password.innerHTML = ''  //清空回報
+        }
 
         /* 監聽事件 */
         // 註冊
         signup_submit.addEventListener('click', (e) => {
             e.preventDefault();  //不懂這裡的功能??
+
+            //每次送出，都要清空回報訊息
+            //資料清除器裡為何不放??????????
+            report_system.innerHTML = ''
+
             // 抓用戶輸入的資料，塞入user_data物件
-            const user_data = {};
             user_data.email = signup_account.value;
             user_data.password = signup_password.value;
-            // 送出資料
-            fetch_post(signup_API, user_data)
-        });
 
+            // 依據資料格式顯示回報訊息
+            check_email(user_data.email)
+            check_password(user_data.password)
+
+            // 格式檢查，其中任一條件錯，會回傳true
+            if (check_email(user_data.email) || check_password(user_data.password)) {
+                return    //return什麼??
+            } else {
+
+                // 帳密存入佔存區
+                remember_data.email = signup_account.value;
+                remember_data.password = signup_password.value;
+                // 格式檢查結果都正確(false||false)，送出資料
+                fetch_post(signup_API, user_data)
+
+
+            }
+        });
         // 登入
+        login_submit.addEventListener('click', (e) => {
+            e.preventDefault()
+
+            report_system.innerHTML = ''
+            // 抓用戶輸入的資料，塞入user_data物件
+            user_data.email = login_account.value;
+            user_data.password = login_password.value;
+
+            check_email(user_data.email)
+            check_password(user_data.password)
+            if (check_email(user_data.email) || check_password(user_data.password)) {
+                return
+            } else {
+                fetch_post(login_API, user_data)
+            }
+        })
+
 
 
 // 參考

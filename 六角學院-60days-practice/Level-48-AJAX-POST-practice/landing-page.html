@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <style>
+        /* * {
+            outline: auto;
+        } */
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row  d-flex justify-content-center">
+            <!-- Signup -->
+            <div class="row card col-4 m-4" style="border-radius: 10px;">
+                <div class="card-body">
+                    <h2 class="text-center text-primary">Signup</h2>
+                    <form action="landing-page.html" id="signup">
+                        <!-- 帳號 -->
+                        <div class="form-group">
+                            <label for="signup_account">帳號</label>
+                            <input type="email" class="form-control" id="signup_account" name="signup_account">
+                        </div>
+                        <!-- 密碼 -->
+                        <div class="form-group">
+                            <label for="signup_password">密碼</label>
+                            <input type="password" class="form-control" id="signup_password" name="signup_password">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary m-2" id="signup_submit">
+                                submit</button>
+
+                            <button type="button" id="signup_auto" class="btn btn-info m-2">
+                                AutoText</button>
+                            <!-- 因為會用監聽功能，所以按鈕就不用 submit，而是使用 button，在要監聽的 input 加入 class -->
+                        </div>
+                    </form>
+                    <h4 id="report_signup" class="text-center text-danger visible"></h4>
+
+                </div>
+            </div>
+
+            <!-- Login -->
+            <div class="row card col-4 m-4" style="border-radius: 10px;">
+                <div class="card-body">
+                    <h2 class="text-center text-warning">Login</h2>
+                    <form action="landing-page.html" id="login">
+                        <div class="form-group">
+                            <label for="login_account">帳號</label>
+                            <input type="email" class="form-control" id="login_account" name="login_account">
+                        </div>
+                        <div class="form-group">
+                            <label for="login_password">密碼</label>
+                            <input type="password" class="form-control" id="login_password" name="login_password">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-warning m-2 text-white">submit</button>
+                            <button type="button" id="login_auto" class="btn btn-info m-2">AutoText</button>
+                        </div>
+                    </form>
+                    <h4 id="report_login" class="text-center text-danger visible"></h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- report -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-8" style="border-radius: 10px;">
+                <div class="card-body">
+                    <h4 id="report_system" class="text-center text-danger"></h4>
+                    <h4 id="report_account" class="text-center text-danger"></h4>
+                    <h4 id="report_password" class="text-center text-danger"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* 取得元素 */
+        const qs = s => document.querySelector(s);
+
+        // Signup
+        let signup_account = qs('#signup_account')
+        let signup_password = qs('#signup_password')
+        let signup_submit = qs('#signup_submit')
+        let signup_auto = qs('#signup_auto')
+
+        // Login
+        let login_account = qs('#login_account')
+        let login_password = qs('#login_password')
+        let login_submit = qs('#login_submit')
+        let login_auto = qs('#login_auto')
+
+
+        // Report
+        // 回報寫在一起
+        let report_signup = qs('#report_signup')
+        let report_login = qs('#report_login')
+        let report_account = qs('#report_account')
+        let report_password = qs('#report_password')
+        let report_system = qs('#report_system')
+
+
+        /* 定義測試資料 */
+        const signup_API = 'https://hexschool-tutorial.herokuapp.com/api/signup'
+        const login_API = 'https://hexschool-tutorial.herokuapp.com/api/signin'
+
+        let user_data = {
+            email: '',
+            password: ''
+        }
+
+        /* 快速填寫 */
+        const addText = () => {
+            signup_account.value = "chaoting@hexschool.com";
+            signup_password.value = "12345678";
+        };
+        signup_auto.addEventListener("click", addText);
+
+        // 設定送出資料的方式
+        const fetch_post = (api, data) => {
+            fetch(api, {
+                body: JSON.stringify(data),
+                headers: {
+                    'content-type': 'application/json'
+                },
+                method: 'POST',
+            })
+         // 設定資料回來後發生的事
+                .then(res => {
+                    return res.json();
+                })
+                .then(res => {
+                    console.log(res);
+                    // 回報
+                    report_system.innerHTML = res.message;
+                    // if (res.message == "帳號註冊成功" || res.message == "此帳號已被使用") {
+                    // //秀出帳密
+                    // report_account.innerHTML = `帳號:${signup_account.value} `
+                    // report_password.innerHTML = `密碼:${signup_password.value}`
+                    // }
+                })
+                .catch((err) => {
+                    console.log('錯誤:', err);
+                });
+        }
+        
+        /* 檢查資料格式 */
+        // 檢查 Email
+        
+        
+        // 檢查 Password
+        
+        /* 清除資料 */
+
+        /* 監聽事件 */
+        // 註冊
+        signup_submit.addEventListener('click', (e) => {
+            e.preventDefault();  //不懂這裡的功能??
+            // 抓用戶輸入的資料，塞入user_data物件
+            const user_data = {};
+            user_data.email = signup_account.value;
+            user_data.password = signup_password.value;
+            // 送出資料
+            fetch_post(signup_API, user_data)
+        });
+
+        // 登入
+
+
+// 參考
+// match()
+// https://www.runoob.com/jsref/jsref-match.html
+
+// 正規表達式
+// https://5xruby.tw/posts/learn-regular-expression/
+    </script>
+</body>
+
+</html>

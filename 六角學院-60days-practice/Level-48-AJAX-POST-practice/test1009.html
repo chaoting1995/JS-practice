@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+
+            <!-- Signup -->
+            <div class="card col-4 m-4" style="border-radius: 10px;">
+                <div class="card-body">
+                    <h2 class="text-center text-primary">Signup</h2>
+                    <form action="" id="signup">
+                        <div class="form-group">
+                            <label for="">帳號</label>
+                            <input type="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">密碼</label>
+                            <input type="password" class="form-control">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary m-2">submit</button>
+                            <button type="button" id="autoText" class="btn btn-info m-2">AutoText</button>
+
+                        </div>
+                    </form>
+                    <h4 id="report_Signup" class="text-center text-danger visible"></h4>
+
+                </div>
+            </div>
+
+            <!-- Login -->
+            <div class="card col-4 m-4" style="border-radius: 10px;">
+                <div class="card-body">
+                    <h2 class="text-center text-warning">Login</h2>
+                    <form action="" id="login">
+                        <div class="form-group">
+                            <label for="">帳號</label>
+                            <input type="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">密碼</label>
+                            <input type="password" class="form-control">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-warning m-2 text-white">submit</button>
+                            <button type="button" id="autoTextText" class="btn btn-info m-2">AutoText</button>
+                        </div>
+                    </form>
+                    <h4 id="report_Login" class="text-center text-danger visible"></h4>
+
+                </div>
+            </div>
+            </form>
+            <!-- 回報資訊 -->
+            <div class="col-6 flex-wrap">
+                <h4 id="report_System" class="text-center text-danger"></h4>
+                <h4 id="report_Email" class="text-center text-danger"></h4>
+                <h4 id="report_Password" class="text-center text-danger"></h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+/* 取得元素 */
+// Signup
+let emailOfSignup = document.querySelector('#signup input[type="email"]')
+let passwordOfSignup = document.querySelector('#signup input[type="password"]')
+let submitOfSignup = document.querySelector('#signup input[type="submit"]')
+
+// Login
+let emailOfLogin = document.querySelector('#login input[type="email"]')
+let passwordOfLogin = document.querySelector('#login input[type="password"]')
+let submitOfLogin = document.querySelector('#login input[type="submit"]')
+
+// report
+// 回報寫在一起
+// let reportOfSignup = document.querySelector('#reportSignup')
+// let reportOfLogin = document.querySelector('#reportLogin')
+let reportOfEmail = document.querySelector('#reportOfEmail')
+let reportOfPassword = document.querySelector('#reportOfPassword')
+let reportOfSystem = document.querySelector('#reportOfSystem')
+
+/* 定義測試資料 */
+const hexAPI = 'https://hexschool-tutorial.herokuapp.com/api/'
+let user = {
+  email: '',
+  password: ''
+}
+
+/* 送出資料 */
+const postData = (action, data) => {
+  axios.post(`${hexAPI}${action}`, data)
+  .then((res)=>{
+    reportOfSystem.innerHTML = res.data.message
+    cleanData()
+  })
+}
+
+/* 清除資料 */
+const cleanData = () => {
+  user = {}
+  emailOfSignup.value = ''
+  passwordOfSignup.value = ''
+  emailOfLogin.value = ''
+  passwordOfLogin.value = ''
+  reportOfEmail.innerHTML = ''
+  reportOfPassword.innerHTML = ''
+}
+
+/* 檢查資料格式 */
+// 檢查 Email
+const checkEmail = (value) => {
+  if (value === '') {
+    reportOfEmail.innerHTML = 'Email不能為空'
+    return true
+  } else if (value.match(/[@]+/) === null ) {
+    reportOfEmail.innerHTML = 'Email必須包含 @符號'
+    return true
+  } else if (value.match(/[.]+/) === null ) {
+    reportOfEmail.innerHTML = 'Email格式錯誤'
+    return true
+  } else {
+    reportOfEmail.innerHTML = ''
+    return false
+  }
+}
+// 檢查 Password
+const checkPW = (value) => {
+  if (value === '') {
+    reportOfPassword.innerHTML = '密碼不能為空'
+    return true
+    // 比較常見的正規表達式用 slash包起來 -> /  /
+    // []，指定的範圍
+    // +，出現一次或多次     
+  } else if (value.match(/[a-zA-Z]+/) === null || value.match(/[0-9]+/) === null) {
+    reportOfPassword.innerHTML = '密碼需包含英數'
+    return true
+  } else {
+    reportOfPassword.innerHTML = ''
+    return false
+  }
+}
+
+/* 監聽事件 */
+// 註冊
+submitOfSignup.addEventListener('click', (e) => {
+  e.preventDefault()
+
+  reportOfSystem.innerHTML = ''
+
+  user.email = emailOfSignup.value
+  user.password =  passwordOfSignup.value
+  
+  checkEmail(user.email)
+  checkPW(user.password)
+  if (checkEmail(user.email) || checkPW(user.password)) {
+    return
+  } else {
+    postData('signup', user)
+    cleanData()
+  }
+})
+// 登入
+submitOfLogin.addEventListener('click', (e) => {
+  e.preventDefault()
+  reportOfSystem.innerHTML = ''
+  user.email = emailOfLogin.value
+  user.password =  passwordOfLogin.value
+  checkEmail(user.email)
+  checkPW(user.password)
+  if (checkEmail(user.email) || checkPW(user.password)) {
+    return
+  } else {
+    postData('signin', user)
+    cleanData()
+  }
+})
+
+
+// 參考
+// match()
+// https://www.runoob.com/jsref/jsref-match.html
+
+// 正規表達式
+// https://5xruby.tw/posts/learn-regular-expression/
+    </script>
+</body>
+
+</html>
+
+// 註冊成功回傳物件
+// config: {url: "https://hexschool-tutorial.herokuapp.com/api/signup", method: "post", data: "{"email":"xxx11@tes.com","password":"xxx11"}", headers: {…}, transformRequest: Array(1), …}
+// data: {success: true, result: {…}, message: "帳號註冊成功"}
+// headers: {content-length: "59", content-type: "application/json; charset=utf-8"}
+// request: XMLHttpRequest {readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, onreadystatechange: ƒ, …}
+// status: 200
+// statusText: "OK"
+// __proto__: Object

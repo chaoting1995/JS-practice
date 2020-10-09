@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	
+</head>
+
+<body>
+	<form action='ajax-xhr-post-json.html'>
+		帳號:
+		<input type="text" class="account" name="account">
+		<br>
+		<br>
+		密碼:
+		<input type="password" class="password" name="password">
+		<br>
+		<br>
+		<input type="submit" class="send" value="送出">
+	</form>
+	<br>
+	<div class="msg1"></div>
+	<br>
+	<div class="msg2"></div>
+	<div class="msg3"></div>
+
+
+	<script>
+		const url = 'https://hexschool-tutorial.herokuapp.com/api/signup';
+		const send = document.querySelector('.send');
+
+		send.addEventListener('click', xhrFun);
+		function xhrFun(e) {
+			e.preventDefault();
+
+			//必須在cb裡，才抓得到使用者送出的值
+			const account = document.querySelector('.account').value;
+			const password = document.querySelector('.password').value;
+			const obj = {};
+			obj.email = account;
+			obj.password = password;
+
+			// 取得資料
+			const xhr = new XMLHttpRequest();
+			xhr.open('post', url, true);
+			//告訴伺服器，我傳的資料是什麼格式
+			xhr.setRequestHeader('Content-type', 'application/json');
+			// 物件轉字串
+			xhr.send(JSON.stringify(obj))
+			// 撈到資料後，執行cb
+			xhr.onload = function () {
+				// 解析成JSON格式
+				const res = JSON.parse(xhr.response);
+
+				console.log(res)
+
+				let msg1 = document.querySelector('.msg1');
+
+				if (res.message == "帳號註冊成功") {
+					msg1.textContent = res.message;
+					let msg2 = document.querySelector('.msg2');
+					let msg3 = document.querySelector('.msg3');
+					msg2.textContent =`帳號:${account} `
+					msg3.textContent =`密碼:${password}`
+				} else {
+					msg1.textContent = "帳號註冊失敗！"
+				}
+			}
+		}
+
+
+	</script>
+</body>
+
+</html>

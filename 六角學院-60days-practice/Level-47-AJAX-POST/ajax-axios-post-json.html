@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+</head>
+
+<body>
+	<form action="ajax-fetch-post-json.html">
+		帳號:
+		<input type="text" class="account" name="account">
+		<br>
+		密碼:
+		<input type="password" class="password" name="password">
+		<br>
+		<input type="submit" class="send" value="Send">
+	</form>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+	<script>
+		// const axios = require('axios');
+
+		const url = 'https://hexschool-tutorial.herokuapp.com/api/signup';
+		const send = document.querySelector('.send');
+
+		send.addEventListener('click', axiosFun);
+		function axiosFun(e) {
+			e.preventDefault();
+			const account = document.querySelector('.account').value;
+			const password = document.querySelector('.password').value;
+			const obj = {};
+			obj.email = account;
+			obj.password = password;
+
+			// 取得資料	
+			// axios.post(url, obj)
+			// 	.then(res => {
+			// 		console.log(res);
+			// 	})
+			// 	.catch(error => {
+			// 		console.log(error.response);
+			// 	});
+
+
+
+			// 取得資料
+			axios.post(url, obj)
+				.then(function (response) {
+					alert(response.data.message)
+				})
+				.catch(function (error) {
+					console.error('error');
+				});
+		}
+	</script>
+</body>
+
+</html>

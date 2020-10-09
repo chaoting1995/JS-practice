@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<form action="ajax-fetch-post-json.html">
+		帳號:
+		<input type="text" class="account" name="account">
+		<br>
+		<br>
+		密碼:
+		<input type="password" class="password" name="password">
+		<br>
+		<br>
+		<input type="submit" class="send" value="Send">
+	</form>
+
+	<br>
+	<div class="msg1"></div>
+	<br>
+	<div class="msg2"></div>
+	<div class="msg3"></div>
+
+	<script>
+		const url = 'https://hexschool-tutorial.herokuapp.com/api/signup';
+		const send = document.querySelector('.send');
+
+		send.addEventListener('click', fetchFun);
+		let msg1 = document.querySelector('.msg1');
+
+		function fetchFun(e) {
+			e.preventDefault();
+			const account = document.querySelector('.account').value;
+			const password = document.querySelector('.password').value;
+			const obj = {};
+			obj.email = account;
+			obj.password = password;
+
+			// 取得資料
+			fetch(url, {
+				body: JSON.stringify(obj),
+				headers: {
+					'content-type': 'application/json'
+				},
+				method: 'POST',
+			})
+				.then(res => {
+					return res.json();
+				})
+				.then(res => {
+					console.log(res);
+					if (res.message == "帳號註冊成功") {
+				// 回報
+				msg1.textContent = res.message;
+				//秀出帳密
+				let msg2 = document.querySelector('.msg2');
+				let msg3 = document.querySelector('.msg3');
+				msg2.textContent = `帳號:${account} `
+				msg3.textContent = `密碼:${password}`
+			} else {
+				msg1.textContent = "帳號註冊失敗！"
+			}
+
+				})
+				.catch((err) => {
+					console.log('錯誤:', err);
+				});
+		}
+
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action='index.html'>
+        帳號:<input type='text' name='account'><br>
+        密碼:<input type='password' name='password'><br>
+        <input type='submit' value='送出'>
+    </form>
+    
+    <br>
+    <div class="msg"></div>
+    
+    
+    <script>
+        var xhr = new XMLHttpRequest();
+        //讀取六角提供的api，內容是一份json檔
+        xhr.open('get','https://hexschool.github.io/ajaxHomework/data.json',true);
+        // 只是要讀取，不打算傳送資料，故用send()裡面塞null
+        xhr.send(null);
+
+        
+        xhr.onload = function(){
+            // 資料在主控台印出
+            console.log(xhr.responseText);
+            // 資料塞入網頁
+            let str = JSON.parse(xhr.responseText);
+            let msg = document.querySelector('.msg');
+            msg.textContent = str[0].name;
+        }
+
+
+    </script>
+</body>
+</html>

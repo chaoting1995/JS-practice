@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<form action='ajax-xhr-post-urlencoded.html'>
+		帳號:
+		<input type="text" class="account" name="account">
+		<br>
+		密碼:
+		<input type="password" class="password" name="password">
+		<br>
+		<input type="submit" class="send" value="Send">
+	</form>
+
+	<script>
+		const url = 'https://hexschool-tutorial.herokuapp.com/api/signup';
+		const send = document.querySelector('.send');
+
+
+		send.addEventListener('click', xhrFun);
+		function xhrFun(e) {
+			e.preventDefault();
+			
+			//必須在cb裡，才抓得到使用者送出的值
+			const account = document.querySelector('.account').value;
+			const password = document.querySelector('.password').value;
+			const obj = {};
+			obj.email = account;
+			obj.password = password;
+
+			// 取得資料
+			const xhr = new XMLHttpRequest();
+			xhr.open('post', url, true);
+			//告訴伺服器，我傳的資料是什麼格式
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			//要合乎後端給定的格式
+			xhr.send(`email=${account}&password=${password}`)
+			console.log(`email=${account}&password=${password}`)
+			console.log(xhr)
+			
+		}
+
+
+	</script>
+</body>
+
+</html>

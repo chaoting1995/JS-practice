@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>landing-page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <style>
@@ -228,6 +228,14 @@
             report_password.innerHTML = ''  //清空回報
         }
 
+        const cleanRemember = () => {
+            remember_data = {}
+            remember_system.innerHTML = ''
+            remember_account.innerHTML = ''
+            remember_password.innerHTML = ''
+        }
+
+
         /* 監聽事件 */
         // 註冊
         signup_submit.addEventListener('click', (e) => {
@@ -236,6 +244,8 @@
             //每次送出，都要清空回報訊息
             //資料清除器裡為何不放??????????
             report_system.innerHTML = ''
+
+            cleanRemember();
 
             // 抓用戶輸入的資料，塞入user_data物件
             user_data.email = signup_account.value;
@@ -250,7 +260,7 @@
                 return    //return什麼??
             } else {
 
-                // 帳密存入佔存區
+                // 帳密存入暫存區
                 remember_data.email = signup_account.value;
                 remember_data.password = signup_password.value;
                 // 格式檢查結果都正確(false||false)，送出資料
@@ -273,8 +283,11 @@
             if (check_email(user_data.email) || check_password(user_data.password)) {
                 return
             } else {
+                cleanRemember()
                 fetch_post(login_API, user_data)
+
             }
+
         })
 
 

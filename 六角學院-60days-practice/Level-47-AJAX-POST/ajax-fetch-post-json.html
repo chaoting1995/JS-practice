@@ -55,16 +55,16 @@
 				.then(res => {
 					console.log(res);
 					if (res.message == "帳號註冊成功") {
-				// 回報
-				msg1.textContent = res.message;
-				//秀出帳密
-				let msg2 = document.querySelector('.msg2');
-				let msg3 = document.querySelector('.msg3');
-				msg2.textContent = `帳號:${account} `
-				msg3.textContent = `密碼:${password}`
-			} else {
-				msg1.textContent = "帳號註冊失敗！"
-			}
+						// 回報
+						msg1.textContent = res.message;
+						//秀出帳密
+						let msg2 = document.querySelector('.msg2');
+						let msg3 = document.querySelector('.msg3');
+						msg2.textContent = `帳號:${account} `
+						msg3.textContent = `密碼:${password}`
+					} else {
+						msg1.innerHTML = "<p>帳號註冊</p><p>失敗！</p>"
+					}
 
 				})
 				.catch((err) => {

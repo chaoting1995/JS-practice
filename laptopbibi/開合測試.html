@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- <section> -->
+        <div class="si">
+            <div class="su">
+                <h3>AAAA</h3>
+                <ul class="hidden">
+                    <li><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">4</a></li>
+                </ul>
+            </div>
+        </div>
+    <!-- </section> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        $('.su h3').on('click',function(){
+            $(this).next().slideToggle('fast');
+        });
+    </script> -->
+
+    <script>
+        let h3 =document.querySelector('.su h3')
+        h3.on('click',slideToggle)
+
+        
+        $('.su h3').on('click',function(){
+            $(this).next().slideToggle('fast');
+        });
+    </script>
+</body>
+</html>

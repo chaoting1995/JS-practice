@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <!-- 做旅館訂房網 -->
+    <!-- 用這網站所提供的 API 先做出雛形來   -->
+    <!-- 獲得 API_TOKEN -->
+    <!-- 申請 API TOKEN -->
+
+
+    <!-- 任務一：請已經了解這知識的學員，寫篇 hackMD，教導該如何夾帶 token -->
+    <!-- 任務二：請用 codepen 寫自己的範例，能正確取得 [GET] 取得所有房型，並用 ul、li 來呈現各個「房型名稱」 -->
+
+    <!-- [GET] 單一房型細節  URL
+    https://challenge.thef2e.com/api/thef2e2019/stage6/room/{id} -->
+
+    <ul id="app"></ul>
+
+    <script>
+        const ul = document.querySelector('#app');
+        // const jwtData = JSON.parse(localStorage.getItem('jwtTest'));
+        const api_token = 'QJCeyJuNdwSwE3MywQqpdDsjp0SkDONF4Rih03ZXidIRpK0DMuUn842aDkTl'
+
+        function send() {
+            fetch('https://challenge.thef2e.com/api/thef2e2019/stage6/rooms', {
+                headers: {
+                    Authorization: 'Bearer ' + api_token
+                },
+                body: JSON.stringify(data),
+                method: 'POST',
+            })
+                .then(r => r.json())
+                .then(obj => {
+                    console.log(obj);
+                })
+        }
+                
+           
+    </script>
 </body>
+
 </html>

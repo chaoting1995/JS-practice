@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex3</title>
+    <style>
+        body {
+            background-color: #ccc;
+        }
+
+        /* .box {
+            width: 200px;
+            height: 200px;
+            background-color: #afa;
+            margin: 40px;
+            overflow: hidden;
+        } */
+
+        .wrapper {
+            margin: 30px;
+            /* background-color: salmon; */
+            position: relative;
+            background-color: #000;
+            /* overflow: hidden; */
+            transition: .5s;
+        }
+
+        .background-img {
+            height: 500px;
+            background: url(./images/product_1.webp) center center no-repeat;
+            background-size: cover;
+            transition: .5s;
+            opacity: 1;
+        }
+
+        h1 {
+            width: 100%;
+            color: #fff;
+            margin: 0;
+            position: absolute;
+            /* bottom: 0; */
+            background-color: #000;
+            /* right: 50px;
+            bottom: 200px; */
+            text-align: center;
+            /* opacity: .0; */
+            transition: .5s;
+        }
+
+        .wrapper:hover .background-img {
+            opacity: 0.3;
+            transition: .5s;
+        }
+
+        .wrapper:hover h1 {
+            transform: translateY(-40px);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="background-img" alt=""></div>
+        <h1>Paris</h1>
+    </div>
+</body>
+
+</html>

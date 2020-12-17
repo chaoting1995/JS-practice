@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //宣告前存取：編譯階段，let提升到TDZ，不讓存取
+      //   console.log(a); //Cannot access 'a' before initialization
+
+      //宣告前存取：編譯階段，會提升var的宣告，允許存取
+      console.log(b); //undefined
+
+      let a = 1;
+      var b = 2;
+
+      //建立前呼叫：編譯階段，函式也會提升
+      foo();
+      function foo() {
+        console.log('123');
+      }
+      console.log(y); //undefined
+      let y = 5;
+    </script>
+  </body>
+</html>

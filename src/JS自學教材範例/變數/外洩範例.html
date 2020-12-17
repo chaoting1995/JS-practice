@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul class="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+    <script>
+      //i洩漏到外面，變成全域變數（window的屬性）導致，alert(i + 1))永遠是4
+      //i會多累加一次，變成3，只是受限於listLen > i，不會被for執行出來
+      //var改let就正常
+      const listLen = document.querySelectorAll('.list li').length;
+      for (var i = 0; listLen > i; i++) {
+        document
+          .querySelectorAll('.list li')
+          [i].addEventListener('click', () => alert(i + 1));
+      }
+      //在for()裡面用let宣告，會在block裡面重新綁定，就不會污染
+    </script>
+  </body>
+</html>

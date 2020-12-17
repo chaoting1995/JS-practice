@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const a = 1;
+      console.log('typeof a:', typeof a);
+      console.log('1.0 === 1', 1.0 === 1);
+      console.log('+0 === -0', +0 === -0);
+
+      //精度問題：函式庫big
+      console.log('0.1 + 0.2', 0.1 + 0.2);
+
+      //數字字串，會自動轉型
+      console.log("'100'/4", '100' / 4);
+
+      //NaN
+      console.log("'hello'/4", 'hello' / 4);
+
+      console.log('"3" == 3;', '3' == 3);
+      console.log("'3' === 3", '3' === 3);
+
+      //一元正號，強轉數字
+      console.log('typeof +"1":', typeof +'1');
+      //自動轉型
+      console.log('+true', +true);
+      console.log('+false', +false);
+    </script>
+  </body>
+</html>

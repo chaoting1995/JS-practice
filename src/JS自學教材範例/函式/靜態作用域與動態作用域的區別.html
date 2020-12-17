@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log(a); //undefined
+
+      // var a = 1;
+      function func1() {
+        console.log(a); //1
+      }
+
+      function func2() {
+        var a = 2;
+        func1();
+      }
+
+      //宣告並指派變數前就呼叫，函式就讀不到變數的值//undefined
+      func2();
+
+      var a = 1;
+
+      //宣告並指派變數後才呼叫，函式就讀得到變數的值//1
+      func2();
+
+      //a=1
+      //JavaScript採用的是詞法作用域，也能被稱為靜態作用域。
+      //詞法作用域在一開始就被決定了，變數的查找會依據你程式書寫下來執行的順序。在這個例子當中func1裡面沒有a，往上一層查找就是最上方的var a = 1。JavaScript就是採用此詞法作用域。
+      //而動態作用域之下，呼叫函數時才決定要去哪裡找，所以在func2中所執行的func1，當下往上查找就會找到var a = 2。所以如果某程式語言是採用動態作用域，所得到的答案就會與JavaScript不同喔！
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //一個函式在讀取變數，就會在執行環境下去查找變數，通常就會是函式裡面，如果在函式裡面找不到的話就會去找外面一層，若是再找不到就會繼續往上一層找，以此類推。
+      var a = 1;
+
+      function func1() {
+        console.log('a:', a); // a = 1
+      }
+      func1();
+
+      var b = 1;
+
+      function func2() {
+        var b = 2;
+        function func3() {
+          console.log('b:', b); // b = 2
+        }
+        func3();
+      }
+      func2();
+    </script>
+  </body>
+</html>

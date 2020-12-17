@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>demo</title>
+  </head>
+
+  <body>
+    <!-- 1.撰寫html架構 -->
+    <h1 id="total">0</h1>
+    <button id="add">+1</button>
+    <button id="minus">-1</button>
+
+    <script>
+      // 2.取得DOM節點的過程+用函式打包動作
+      function byId(id) {
+        return document.getElementById(id);
+      }
+      // 3.註冊事件監聽器，當點擊事件發生，執行計數的程式
+      // 4.用函式打包成事件處理器
+      function clickHandler(button, value, total) {
+        button.addEventListener('click', function () {
+          total.innerHTML = +total.innerHTML + value;
+        });
+      }
+
+      // 5.取得操作介面(按鈕、數字顯示)的DOM節點
+      const addButton = byId('add');
+      const minusButton = byId('minus');
+      const total = byId('total');
+
+      // 6.呼叫事件處理器，綁定按鈕與加減邏輯
+      clickHandler(addButton, 1, total);
+      clickHandler(minusButton, -1, total);
+    </script>
+  </body>
+</html>

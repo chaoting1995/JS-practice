@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function func1(n) {
+        return `aaa${n}aaa`;
+      }
+
+      function func2() {
+        var a = 2;
+        console.log(func1(a));
+      }
+      func2();
+      //  ．執行環境scope與執行堆疊stack
+      //   呼叫函式，就產生執行環境
+      //   函式執行結束，執行環境就離開
+      //   瀏覽器預設開啟全域的執行環境
+      //   執行環境會一層一層堆疊起來
+      //   執行堆疊取決於函式呼叫位置
+      //   檢驗執行環境與執行堆疊，可以用：F12>source>暫停鍵
+    </script>
+  </body>
+</html>

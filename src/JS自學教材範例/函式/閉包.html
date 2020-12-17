@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   function aFunc(x) {
+      //     function bFunc() {
+      //       console.log(x++);
+      //     }
+      //     return bFunc;
+      //   }
+
+      //用箭頭韓式表達 bFunc
+      //bFunc可以不需要名稱，直接用return匿名函式的語法更簡潔:
+      function aFunc(x) {
+        return () => console.log(x++);
+      }
+
+      const newFunc = aFunc(1);
+
+      newFunc();
+      newFunc();
+      newFunc();
+    </script>
+  </body>
+</html>

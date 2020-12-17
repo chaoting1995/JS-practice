@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let a = 1;
+      //block scope
+      {
+        let b = 2;
+        var c = 3;
+        console.log(b); //2
+      }
+      console.log(a); //1
+      //   console.log(b); //b is not defined
+      console.log(c); //3
+
+      //function scope
+      function foo() {
+        var d = 4;
+        console.log(d); //4
+      }
+      foo(); //函式內變數呼叫函式後，變數才佔記憶體
+      //   console.log(d); //d is not defined
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //常數可以記錄復合型資料的參照
+
+      const c = [1, 2];
+      const d = c; //給的是大樓地址
+      const e = [...c]; //這才是colon新大樓
+
+      console.log('d', d);
+      console.log('e', e);
+      c[0] = 3; //c 變成[3,2]
+
+      console.log('d', d); //會跟c一起改變成員，傳址
+      console.log('e', e); //不會跟c一起改變成員
+    </script>
+  </body>
+</html>

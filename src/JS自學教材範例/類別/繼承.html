@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Person(name) {
+        // 在建構子中設定物件屬性
+        this.name = name;
+      }
+      // 在建構子的原型屬性(Person.prototype)中，設定方法(函式)
+      // 建構子出來的物件都可以共用這些方法
+      // 避免造成冗餘的記憶體消耗
+      Person.prototype.hello = function () {
+        console.log(`Hello ${this.name}.`);
+      };
+
+      let gary = new Person('Gary');
+      gary.hello(); // Hello Gary.
+
+      //   由 getPrototypeOf(obj)，取得新產生物件的原型
+      Object.getPrototypeOf(gary); // {hello: ƒ, constructor: ƒ}
+
+      console.log('Person.prototype', Person.prototype);
+    </script>
+  </body>
+</html>

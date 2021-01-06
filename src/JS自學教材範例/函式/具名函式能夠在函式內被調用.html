@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const funcA = function funcB() {
+        console.log(funcA, funcB);
+        // 具名函式能夠在函式內被調用
+      };
+
+      funcB();
+      console.log(funcA, funcB); //funcB is not defined
+      // FE的具名函式不能夠在函式外被調用
+    </script>
+  </body>
+</html>

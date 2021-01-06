@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // function a() {
+      //   const x = '1';
+      // }
+      // a();
+      //function執行完，沒有再參照變數，裡面的區域變數，所佔記憶體就會被釋放掉
+
+      function b() {
+        let y = 1000;
+        return function (p) {
+          y = y + p;
+          return y;
+        };
+      }
+
+      console.log(b()); //會回傳裡面的function
+      // console.log(b()(100)); //後面加個()來執行裡面的函式//1100
+
+      const c = b();
+      console.log(c(100)); //1100
+      console.log(c(100)); //1200
+      console.log(c(100)); //1300
+      //不斷取用區域變數y，y所佔記憶體就不會被釋出
+
+      const d = b();
+      console.log(d(1000)); //2000
+      console.log(d(1000)); //3000
+      console.log(d(1000)); //4000
+      //由c觸發，執行b()，會產生區域變數y，屬於c
+      //由d觸發，執行b()，會產生區域變數y，屬於d
+      //c跟d都可執行屬於自己的函式，擁有自己的變數
+      //c跟d之中的區域變數互相獨立
+      //function就是物件，所以將b()指派給c跟d時，其實是在複製這個物件(形同下面的行為)，所以彼此不會被覆蓋
+
+      const a = { x: 1 };
+      const b = { x: 1 };
+
+      console.log(a === b); //false
+
+      //閉包中的區域變數，其所佔記憶體不會被釋放
+      //閉包中的變數不容易受到全域的污染
+      //閉包實務上目前比較常見於框架開發上
+    </script>
+  </body>
+</html>

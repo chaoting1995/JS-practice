@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const a = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+
+      // 用展開運算符拷貝陣列
+      const b = [...a];
+      a[0][0] = 2; //會影響陣列b
+      console.log('b2', b);
+
+      // 用for拷貝陣列
+      // function copyArray(arr) {
+      //   const c = [];
+      //   for (let i = 0; i < arr.length; i++) {
+      //     const tmp = [];
+      //     for (let j = 0; j < arr[i].length; j++) {
+      //       tmp.push(arr[i][j]);
+      //     }
+      //     c.push(tmp);
+      //   }
+      //   return c;
+      // }
+      // const c = copyArray(a);
+
+      // a[0][0] = 3; //不會影響陣列c
+      // console.log('c', c);
+    </script>
+  </body>
+</html>

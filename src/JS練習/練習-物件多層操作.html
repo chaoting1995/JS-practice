@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Input:
+      let inputValue = {
+        hired: {
+          be: {
+            to: {
+              deserve: 'I',
+            },
+          },
+        },
+      };
+
+      // Output:
+      //   let outputValue = {
+      //     I: {
+      //       deserve: {
+      //         to: {
+      //           be: 'hired',
+      //         },
+      //       },
+      //     },
+      //   };
+
+      function test(obj) {
+        let arr = [];
+        function getKey(o) {
+          const [e] = Object.keys(o);
+          arr.push(e);
+          if (typeof o[e] === 'object') {
+            getKey(o[e]);
+          } else {
+            arr.push(o[e]);
+          }
+        }
+        getKey(obj);
+
+        const result = arr.reduce((p, v, i) => {
+          if (i === 0) {
+            return p;
+          } else {
+            const current = {};
+            current[v] = p;
+            return current;
+          }
+        }, arr[0]);
+        return result;
+      }
+
+      const outputValue = test(inputValue);
+      console.log('outputValue:', outputValue);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 會改變原始陣列
+
+      //---------------------------------------------------------
+
+      pop();
+      // 取出最後的item
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = arr.pop();
+      console.log(a); // [1, 2, 3, 4, 5, 6, 7]
+      console.log(b); // 8
+
+      //---------------------------------------------------------
+
+      push(x);
+      // 在最後面新增item
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      arr.push(9, 10);
+      console.log(a); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+      //---------------------------------------------------------
+
+      shift();
+      // 取出最前面的item
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.shift();
+      console.log(a); // [2, 3, 4, 5, 6, 7, 8]
+      console.log(b); // 1
+
+      //---------------------------------------------------------
+
+      unshift(x);
+      // 在最前面新增item
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      a.unshift(100, 200, 300);
+      console.log(a); // [100, 200, 300, 1, 2, 3, 4, 5, 6, 7, 8]
+
+      //---------------------------------------------------------
+
+      sort();
+      // 重新排序item
+      // 裡頭包含了一個排序用的判斷函式，函式內必須包含兩個參數，這兩個參數分別代表陣列裡第 n 個和第 n+1 個元素，透過比較第 n 和第 n+1 個元素的大小來進行排序。
+      let a = [1, 3, 8, 4, 5, 7, 6, 2];
+      a.sort((x, y) => y - x);
+      console.log(a); // [8, 7, 6, 5, 4, 3, 2, 1]
+      a.sort((x, y) => x - y);
+      console.log(a); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+      // 如果不使用判斷函式，預設會將元素轉換成字串，並採用 unicode 來判斷，這也會造成某些數字的排序錯誤。
+      let a = [1, 3, 8, 4, 5, 7, 6, 2, 9, 10, 11];
+      a.sort();
+      console.log(a); // [1, 10, 11, 2, 3, 4, 5, 6, 7, 8, 9]
+      // ．英文、數字排序：依Unicode字串碼順序來排序
+      // ．中文的排序：依big5編碼來排序、依筆劃來排序，要把比較的回調函式傳入參數
+
+      //---------------------------------------------------------
+
+      reverse();
+      // 反轉item順序
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      a.reverse();
+      console.log(a); // [8, 7, 6, 5, 4, 3, 2, 1]
+
+      //---------------------------------------------------------
+
+      splice(x, y, z);
+      // 移出、取代、插入指定item
+      // 包含三個參數：
+      // 參數一：要移出或要添加的索引值 ( 必填 )
+      // 參數二：要移出的長度 ( 選填)
+      //   若不填，則參數一位置起，後方所有元素都會被移除
+      //   若設0，則不會有元素被移除
+      // 參數三：要添加的內容 ( 選填 )
+
+      // 移出
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      a.splice(5, 1);
+      console.log(a); // [1, 2, 3, 4, 5, 7, 8] ( 6 被移除了 )
+
+      //移出多個相同值，搭配迴圈語句
+      let arr = ['x', 'b', 'x', 'x', 'b'];
+      for (let i = 0, len = arr.length; i < len; i++) {
+        if (arr[i] === 'x') {
+          arr.splice(i, 1);
+        }
+      }
+
+      // 取代
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      a.splice(5, 1, 100);
+      console.log(a); // [1, 2, 3, 4, 5, 100, 7, 8] ( 6 被移除，100 加到第 5 個位置  )
+
+      // 取代多個
+      let b = [1, 2, 3, 4, 5, 6, 7, 8];
+      b.splice(5, 3, 100, 200, 300);
+      console.log(b); // [1, 2, 3, 4, 5, 100, 200, 300] ( 6,7,8 被移除，100,200,300 加到第 5,6,7 個位置  )
+
+      // 取代多個相同值，搭配迴圈語句
+      let arr = ['x', 'b', 'x', 'x', 'b'];
+      for (let i = 0, len = arr.length; i < len; i++) {
+        if (arr[i] === 'x') {
+          arr.splice(i, 1, 'c');
+        }
+      }
+
+      //插入
+      let c = [1, 2, 3, 4, 5, 6, 7, 8];
+      c.splice(5, 0, 100);
+      console.log(c); // [1, 2, 3, 4, 5, 100, 6, 7, 8] ( 沒有元素被移除，100 加到第 5 個位置
+
+      //---------------------------------------------------------
+
+      copyWithin(x, y, z);
+      //淺拷貝部分item，放到並取代同陣列指定位置
+      //有三個參數
+      //參數一：要置換的位置 ( 必填 )
+      //參數二：從什麼位置開始複製 ( 選填，預設 0 )
+      //參數三：停止複製的元素的後一個位置 ( 選填，預設等於陣列長度 )
+      arr.copyWithin(target, start, end);
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      a.copyWithin(2);
+      console.log(a); // [1,2,1,2,3,4,5,6] ( 因 7 和 8 超過陣列長度，只出現到 6 )
+
+      let b = [1, 2, 3, 4, 5, 6, 7, 8];
+      b.copyWithin(3, 1, 3);
+      console.log(b); // [1,2,3,2,3,6,7,8] ( 複製 2,3 取代 4,5 )
+
+      //---------------------------------------------------------
+
+      fill(x, y, z);
+      // 把所有item，置換為指定值
+      //有三個參數：
+      //參數一：準備要置換的內容 ( 必填 )
+      //參數二：從什麼位置開始置換 ( 選填，不設定就全部置換 )
+      //參數三：停止置換的元素的前一個位置 ( 選填，預設等於陣列長度 )
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      a.fill('a');
+      console.log(a); // ['a','a','a','a','a','a','a','a']
+
+      let b = [1, 2, 3, 4, 5, 6, 7, 8];
+      b.fill('b', 3, 5);
+      console.log(b); // [1,2,3,'b','b',6,7,8]
+
+      //---------------------------------------------------------
+
+      // 回傳陣列元素資訊或索引值
+
+      //---------------------------------------------------------
+
+      length;
+      //  回傳item總數
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.length); // 8
+
+      //---------------------------------------------------------
+
+      indexOf();
+      // 由左而右判斷陣列中是否包含某值
+      // 如果有包含就回傳這個值在陣列中的索引值，如果沒有就回傳 -1
+      // 有兩個參數:
+      // 參數一：要判斷的值 ( 必填 )
+      // 參數二：搜尋起點 ( 選填，預設為 0 )
+      //    若這個索引值大於或等於陣列長度，會直接回傳 -1，意即不會在陣列中搜尋
+      //    如果索引值是一個負數，會從陣列的最後一個往回算，最後一個的索引值為 -1，以此類推。注意：儘管往回算，但依然會從左往右全部搜尋
+      //    如果負數索引值在回頭計算之後仍然小於 0，則會從左往右全部搜尋。 這個參數的預設值為 0（即搜尋整個陣列）。
+
+      // 多個成員符合時，只會回傳第一個
+      // 用比較運算符(===)在比對
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.indexOf(4)); // 3
+      console.log(a.indexOf(4, 5)); // -1 ( 搜尋 5,6,7,8 沒有 4 )
+
+      //   尋找該元素所有出現在陣列中的位置;
+      var indices = [];
+      var array = ['a', 'b', 'a', 'c', 'a', 'd'];
+      var element = 'a';
+      var idx = array.indexOf(element);
+      while (idx != -1) {
+        indices.push(idx);
+        idx = array.indexOf(element, idx + 1);
+      }
+      console.log(indices); // [0, 2, 4]
+
+      // 尋找元素是否存在於陣列中，若沒有則加入到陣列裡。
+      function updateVegetablesCollection(veggies, veggie) {
+        if (veggies.indexOf(veggie) === -1) {
+          veggies.push(veggie);
+          console.log('New veggies collection is : ' + veggies);
+        } else if (veggies.indexOf(veggie) > -1) {
+          console.log(veggie + ' already exists in the veggies collection.');
+        }
+      }
+
+      var veggies = ['potato', 'tomato', 'chillies', 'green-pepper'];
+
+      updateVegetablesCollection(veggies, 'spinach');
+      // New veggies collection is : potato,tomato,chillies,green-pepper,spinach
+      updateVegetablesCollection(veggies, 'spinach');
+      // spinach already exists in the veggies collection.
+
+      //---------------------------------------------------------
+
+      lastIndexOf();
+      // 由右而左判斷陣列中是否包含某值
+      // 如果有包含就回傳這個值在陣列中的索引值，如果沒有就回傳 -1
+      // 有兩個參數:
+      // 參數一：要判斷的值 ( 必填 )
+      // 參數二：搜尋起點 ( 選填，預設為整個陣列長度 - 1 )
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.lastIndexOf(3)); // 2
+      console.log(a.lastIndexOf(3, 1)); // -1 ( 只判斷 1,2，所以沒有 3 )
+
+      //---------------------------------------------------------
+
+      find();
+      // 將每個item帶入指定函式內做判斷
+      // 回傳第一個符合判斷的item
+      // 如果沒有元素符合則會回傳 undefined
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.find((e) => e > 3)); // 4
+      console.log(a.find((e) => e < 0)); // undefined
+
+      //---------------------------------------------------------
+
+      findIndex();
+      // 將每個item帶入指定函式內做判斷
+      // 回傳第一個符合判斷條件元素的索引值
+      // 如果沒有元素符合則會回傳 -1
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.findIndex((e) => e > 3)); // 3
+      console.log(a.findIndex((e) => e < 0)); // -1
+
+      //---------------------------------------------------------
+
+      //findIndex與最上面說的indexOf不同的地方也是在於
+      //findIndex因為使用了回調(callback)函式，可以提供更多的在尋找時的彈性應用。以下為範例:
+
+      const aArray = [1, 3, 5, 7, 10, 22];
+      // find value
+      const bValue = aArray.find(function (value, index, array) {
+        return value > 6;
+      });
+      // find index
+      const cIndex = aArray.findIndex(function (value, index, array) {
+        return value > 6;
+      });
+
+      console.log(aArray); //[1, 3, 5, 7, 10, 22]
+      console.log(bValue); //7 // find value
+      console.log(cIndex); //3 // find index
+
+      //---------------------------------------------------------
+
+      filter();
+      // 將每個item帶入指定函式內做判斷
+      //如果元素符合判斷條件則會傳出，成為一個新的陣列元素
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.filter((e) => e > 3)); // [4, 5, 6, 7, 8]
+      console.log(a.filter((e) => e % 2 == 0)); // [2, 4, 6, 8]
+
+      //---------------------------------------------------------
+
+      forEach();
+      // 將每個item帶入指定函式內做運算
+      // 函式有三個參數：
+      // 參數一：value，每個元素的值 ( 必填 )
+      // 參數二：index，該元素的索引值 ( 選填 )
+      // 參數三：array，當前陣列 ( 選填 )
+      // 不會額外回傳值，只單純執行每個陣列內的物件或值
+
+      arr.forEach(function (value, index, array) {
+        // 對陣列元素作某些事
+      });
+
+      let a = [1, 2, 3, 4, 5];
+      let b = 0;
+      a.forEach((item) => {
+        b = b + item;
+      });
+      console.log(b); // 15 ( 1+2+3+4+5 )
+
+      // 如果透過第二和第三個參數搭配，就能做到改變原本陣列的效果
+      let a = [1, 2, 3, 4, 5];
+      a.forEach((item, index, arr) => {
+        arr[index] = item * 10;
+      });
+      console.log(a); // [10,20,30,40,50]
+
+      var forEachIt = people.forEach(function (item, index, array) {
+        return item; // forEach 沒在 return 的，所以這邊寫了也沒用
+      });
+      console.log(forEachIt); // undefined
+      //---------------------------------------------------------
+
+      join();
+      // 用指定字符，將所有item合併成字串
+      // 若沒有指定字符，預設用「逗號」合併
+      // 陣列轉字串
+      //可設定分隔符號(或空白字元)
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.join()); // 1,2,3,4,5,6,7,8
+      console.log(a.join('')); // 12345678
+      console.log(a.join('@@')); // 1@@2@@3@@4@@5@@6@@7@@8
+
+      //---------------------------------------------------------
+
+      concat();
+      // 合併陣列，成新陣列
+      // 使用 ES6 語法也可以用擴展運算符...來代替
+
+      let a = [1, 2, 3, 4, 5];
+      let b = [6, 7, 8, 9];
+
+      let c = a.concat(b);
+      let d = [...a, ...b]; // 使用 ...
+
+      console.log(c); // [1,2,3,4,5,6,7,8,9]
+      console.log(d); // [1,2,3,4,5,6,7,8,9]
+      //---------------------------------------------------------
+
+      slice(x, y);
+      // 截取部份item，成新陣列
+      //有兩個參數:
+      // 參數一：起始位置 ( 必填 )
+      // 參數二：第二個是結束位置 ( 操作時數字減 1 )( 必填 )
+      // 用於從陣列中分割出子陣列
+      // 用淺拷貝的方式，回傳新陣列
+      // 結束點不算！！
+      // slice(0)、slice()，相當於淺拷貝
+      // 索引值為負，從最後面開始算位置(最後一個索引值為-1)
+      // 只要"開頭索引值"比"結束索引值"的位置更靠左，就有回傳值
+      // end 為結束的索引值，不填，則得到位置起，後面所有元素
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.slice(2, 4);
+      console.log(b); // [3, 4]
+
+      //---------------------------------------------------------
+
+      map();
+      // 透過函式內所回傳的item，組成新陣列
+      // 如果不回傳則是 undefined
+      // 回傳新陣列與原陣列等長
+      // 裡頭有一個函式 ( 必填 ) 和一個回傳函式裡的 this 參數 ( 選填 )
+      // 函式有三個參數：
+      // 參數一：value，每個元素的值 ( 必填 )
+      // 參數二：index，該元素的索引值 ( 選填 )
+      // 參數三：array，當前陣列 ( 選填 )
+
+      var mapEmpty = people.map(function (item, index, array) {});
+      console.log(mapEmpty); // [undefined, undefined, undefined, undefined]
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.map((e) => {
+        return e + 10;
+      });
+      console.log(b); // [11, 12, 13, 14, 15, 16, 17, 18]
+
+      //   套用第二個和第三個參數的變化;
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.map((e, i, arr) => {
+        return `${e}${i}${arr.find((e) => e % 5 == 1)}`; // 組合成「元素 + 索引值 + 除以五餘數為 1 的元素」
+      });
+      console.log(b); // ['101', '211', '321', '431', '541', '651', '761', '871']
+
+      //   如果要使用回傳函式裡 this 的參數，則「不能使用」箭頭函式，因為箭頭函式的 this 指向和函式的 this 指向不同，所以要用一般的函式處理。
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.map(function (e) {
+        return e + this; // 此處的 this 為 10
+      }, 10);
+      console.log(b); // [11, 12, 13, 14, 15, 16, 17, 18]
+
+      //---------------------------------------------------------
+      set();
+      //如果希望「陣列（Array）」的元素不會重複，可以使用 Set
+      // set 裡面的鍵不會重複，是 unique 的
+      const obj = {
+        foo: 'bar',
+      };
+      const mySet = new Set();
+      mySet.add(1); // [1]
+      mySet.add(5); // [1, 5]
+      mySet.add(5); // [1, 5]，重複的元素不會被加進去，依然是
+      mySet.add(obj); // [ 1, 5, { foo: 'bar' } ]
+
+      mySet.has(5); // true
+      mySet.has(obj); // true
+      mySet.has({
+        foo: 'bar',
+      }); // false
+
+      mySet.delete(5); // true，刪除成功
+      mySet.delete(2); // false，刪除失敗
+      mySet.size; // 2
+
+      // for ... of
+      mySet.entries(); // [key, value] 內容相同
+      mySet.values(); // 和 mySet.keys 得到相同的內容
+      mySet.keys(); // 和 mySet.values 得到相同的內容
+
+      mySet.forEach((item) => console.log('item', item));
+      mySet.clear();
+      //---------------------------------------------------------
+
+      reduce();
+      // 將陣列中每個元素進行計算，每次計算的結果會再與下個元素作計算，直到結束為止
+      // 裡頭包含一個函式 ( 必填 ) 和初始計算的數值 ( 選填 )
+      // 函式有四個參數：
+      // 參數一：accumulator，前一個值 ( 必填 )
+      //   前一個參數，如果是第一個陣列的話，值是以另外傳入或初始化的值
+      // 參數二：currentValue，當前值 ( 必填 )
+      // 參數三：currentIndex，當前索引值 ( 選填 )
+      // 參數四：array，當前陣列 ( 選填 )
+
+      // reduce具有分散運算的特點，可以用於下面幾個應用之中:
+      //   兩相比較最後取出特定的值(最大或最小值)
+      //   計算所有成員(值)，總合或相乘
+      //   其它需要兩兩處理的情況(組合巢狀陣列等等)
+
+      var reduceEmpty = people.reduce(
+        (accumulator, currentValue, currentIndex, array) => {},
+        init
+      );
+      console.log(reduceEmpty); // 沒有條件，會是 undefined
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.reduce(function (total, e) {
+        return total + e; // 與前一個值相加
+      }, 0); // 傳入初始化值為 0
+      console.log(b); // 36 ( 1+2+3+4+5+6+7+8=36 )
+
+      // 給定一個初始值，reduce會從索引值的0接著取第二個值進行迭代
+      // 如果沒給初始值，reduce會從索引值1開始開始迭代。可以用下面這個範例來觀察它是如何運作的:
+
+      const aArray = [0, 1, 2, 3, 4];
+
+      const total = aArray.reduce(function (pValue, value, index, array) {
+        console.log(
+          'pValue = ',
+          pValue,
+          ' value = ',
+          value,
+          ' index = ',
+          index
+        );
+        return pValue + value;
+      });
+
+      console.log(aArray); // [0, 1, 2, 3, 4]
+      console.log(total); // 10
+
+      //下面給定初始值10，注意它放的地方是在回調函式之後的參數中
+      const total2 = aArray.reduce((pValue, value, index, array) => {
+        console.log(
+          'pValue = ',
+          pValue,
+          ' value = ',
+          value,
+          ' index = ',
+          index
+        );
+        return pValue + value;
+      }, 10);
+      console.log(total2); // 20
+
+      var reducePlus = people.reduce(
+        (accumulator, currentValue, currentIndex, array) => {
+          console.log('reduce', accumulator, currentValue, currentIndex);
+          return Math.max(accumulator, currentValue.age); // 與前一個值比較哪個大
+        },
+        0
+      );
+      console.log(reducePlus); // 最大值為 24
+
+      //---------------------------------------------------------
+
+      reduceRight();
+      // 由右到左計算的reduce()
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.reduce(function (total, e) {
+        return total - e;
+      });
+      console.log(b); // -34 ( 1-2-3-4-5-6-7-8 = -34 )
+      let c = a.reduceRight(function (total, e) {
+        return total - e;
+      });
+      console.log(c); // -20 ( 8-7-6-5-4-3-2-1 = -20 )
+      //---------------------------------------------------------
+
+      flat();
+      // 將多維陣列的深度轉成一維 ( 扁平化 )
+      // 它有一個選填的參數，代表要轉換的深度數字，預設為 1
+      // 如果深度有很多層，可使用Infinity來全部展開成一維陣列。
+
+      let a = [1, 2, [3], [4, [5, [6]]]];
+      let b = a.flat();
+      let c = a.flat(2);
+      let d = a.flat(Infinity);
+      console.log(b); // [1, 2, 3, 4, [5, [6]]]
+      console.log(c); // [1, 2, 3, 4, 5, [6]]
+      console.log(d); // [1, 2, 3, 4, 5, 6]
+
+      //---------------------------------------------------------
+
+      flatMap();
+      // 等於map()和flat()的組合，在運算後直接將陣列扁平化處理
+
+      let a = [1, 2, [3], [4, 5]];
+      let b = a.flatMap((e) => e + 1);
+      let c = a.map((e) => e + 1).flat();
+      console.log(b); // [2, 3, "31", "4,51"] ( 可以看到 b 和 c 得到的結果相同 )
+      console.log(c); // [2, 3, "31", "4,51"]
+
+      //---------------------------------------------------------
+
+      Array.from();
+      // 將「類陣列物件」或是「可迭代的物件」轉換成新陣列
+      // 有兩個參數:
+      // 參數一：「類陣列物件」或「可迭代的物件」( 必填 )
+      // 參數二：改變轉換成陣列元素的函式 ( 選填 )
+
+      // 類陣列物件具有 length 屬性以及索引化 index 的元素
+      // 可迭代物件表示具有可以利用迭代的方式取得它自己本身的元素，例如 Map 和 Set...等。( 參考 MDN 說法 )
+
+      let a = 'abcde';
+      let b = Array.from(a);
+      console.log(b); // ['a','b','c','d','e']
+
+      let c = Array.from(a, (e) => e + e);
+      console.log(c); // ['aa','bb','cc','dd','ee']
+      //   類陣列物件寫法必須包含 length 屬性，且物件 key 須為 0 開始的數字，對應轉換後的元素索引。
+
+      let a = {
+        0: 14,
+        2: 13,
+        1: 7,
+        3: 9,
+        4: 6,
+        length: 5,
+      };
+      let b = Array.from(a);
+      console.log(b); // [14,7,13,9,6]
+
+      //---------------------------------------------------------
+
+      Array.of();
+      // 可以快速將數字、字串等內容，轉換成陣列
+
+      let a = Array.of(1, 'a', 2, 'b', 3);
+      console.log(a); // [1, "a", 2, "b", 3]
+
+      //---------------------------------------------------------
+
+      toString();
+      // 把整個陣列轉換成文字
+      // 類似於join()
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.toString();
+      console.log(b); // 1,2,3,4,5,6,7,8
+
+      //---------------------------------------------------------
+
+      every();
+      //將每個item帶入指定函式內做判斷，全部item符合判斷，才回傳 true
+
+      let a = [1, 2, 3, 4, 5, 6];
+      console.log(a.every((e) => e > 3)); // fasle ( 因為 1、2 小於 3，3 等於 3 )
+      console.log(a.every((e) => e > 0)); // true
+      //---------------------------------------------------------
+
+      some();
+      // 將每個item帶入指定函式內做判斷，部分item符合判斷，就回傳 true
+
+      let a = [1, 2, 3, 4, 5, 6];
+      console.log(a.some((e) => e > 3)); // 回傳 true，因為 4、5、6 大於 3
+      console.log(a.some((e) => e > 6)); // 回傳 false，因為全都小於或等於 6
+
+      //---------------------------------------------------------
+
+      includes();
+      // 判斷陣列中是否包含某個值，如果有包含就回傳 true，否則回傳 false
+      // 有兩個參數:
+      // 參數一：要判斷的值 ( 必填 )
+      // 參數二：從陣列的哪個位置開始判斷 ( 選填 )
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      console.log(a.includes(2)); // true
+      console.log(a.includes(2, 2)); // false ( 搜尋 3,4,5,6,7,8 沒有 2 )
+
+      //---------------------------------------------------------
+
+      valueOf();
+      //  會回傳陣列的原始值，如果原本的陣列有修改，那麼回傳的原始值也會跟著改變
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = a.valueOf();
+      console.log(a); // [1, 2, 3, 4, 5, 6, 7, 8]
+      let c = a.valueOf();
+      a.shift();
+      console.log(a); // [2, 3, 4, 5, 6, 7, 8]
+      console.log(b); // [2, 3, 4, 5, 6, 7, 8] ( 因為 a 的原始值更動了，所以 b 也變了 )
+      console.log(c); // [2, 3, 4, 5, 6, 7, 8]
+
+      //---------------------------------------------------------
+
+      Array.isArray();
+      // 能判斷一個物件是否為陣列，如果是就回傳 true，不然就回傳 false
+
+      let a = [1, 2, 3, 4, 5, 6, 7, 8];
+      let b = 123;
+      let c = 'hello';
+      let d = { d1: 1, d2: 2 };
+      console.log(Array.isArray(a)); // true
+      console.log(Array.isArray(b)); // false
+      console.log(Array.isArray(c)); // false
+      console.log(Array.isArray(d)); // false
+      //---------------------------------------------------------
+
+      keys();
+      //  回傳陣列中的每一個索引值 ( key ) 成為一個新的 Array Iterator 物件，因為是 Array Iterator 物件，可以透過for...of來取得。
+
+      let a = ['a', 'b', 'c', 'd', 'e'];
+      let b = a.keys();
+
+      for (let key of b) {
+        console.log(key); // 連續出現 1、2、3、4、5
+      }
+    </script>
+  </body>
+</html>

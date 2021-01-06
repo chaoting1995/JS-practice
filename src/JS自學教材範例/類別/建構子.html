@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   // 1.先看看該如何用一般函式定義一個人：
+      //   function person(name) {
+      //     var obj = {};
+      //     obj.name = name;
+      //     obj.greeting = function () {
+      //       alert(`Hi! I'm ${this.name}.`);
+      //     };
+      //     return obj;
+      //   }
+      //   // 2.呼叫此函式之後即可建立新的 1 個人
+      //   var sam = person('sam');
+      //   sam.name; //sam
+      //   sam.greeting(); //alert(`Hi! I'm ${this.name}.`);
+
+      // // 1.透過建構子函式
+      // function Person(name) {
+      //   this.name = name;
+      //   this.greeting = function () {
+      //     alert(`Hi! I'm ${this.name}.`);
+      //   };
+      // }
+      // // 2.呼叫建構子以建立物件
+      // var person1 = new Person('Bob');
+      // var person2 = new Person('Sarah');
+
+      // //3.檢視所建立的物件實例
+      // person1.name;
+      // person1.greeting();
+      // person2.name;
+      // person2.greeting();
+
+      //1.建立完整的建構子
+      function Person(first, last, age, gender, interests) {
+        this.name = {
+          first,
+          last,
+        };
+        this.age = age;
+        this.gender = gender;
+        this.interests = interests;
+        this.bio = function () {
+          alert(
+            `${this.name.first} ${this.name.last} is ${this.age} years old.
+            He likes ${this.interests[0]} and ${this.interests[1]}.`
+          );
+        };
+        this.greeting = function () {
+          alert(`Hi! I'm ${this.name}.`);
+        };
+      }
+      //2.建立物件實例
+      var person3 = new Person('Bob', 'Smith', 32, 'male', ['music', 'skiing']);
+      //3.存取物件
+      person3['age'];
+      person3.interests[1];
+      person3.bio();
+      person3.__proto__;
+      console.log('person3.__proto__', person3.__proto__);
+      console.log('person3.__proto__.__proto__', person3.__proto__.__proto__);
+
+      let arr = [0, 1, 2];
+      console.log('arr', arr);
+      const fn = function () {
+        console.log('a');
+        return 'a';
+      };
+      console.log('fn()', fn);
+
+      person3.__proto__ === Person.prototype; //true
+    </script>
+  </body>
+</html>

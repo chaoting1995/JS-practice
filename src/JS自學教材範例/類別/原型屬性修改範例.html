@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1.建立完整的建構子
+      function Person(first, last, age, gender, interests) {
+        this.name = {
+          first,
+          last,
+        };
+        this.age = age;
+        this.gender = gender;
+        this.interests = interests;
+        this.bio = function () {
+          alert(
+            `${this.name.first} ${this.name.last} is ${this.age} years old.
+            He likes ${this.interests[0]} and ${this.interests[1]}.`
+          );
+        };
+        this.greeting = function () {
+          alert(`Hi! I'm ${this.name}.`);
+        };
+      }
+      //2.建立物件實例
+      var person1 = new Person('Bob', 'Smith', 32, 'male', ['music', 'skiing']);
+      // 修改原型
+      // 將新函式新增到建構子的 prototype 屬性：
+      Person.prototype.farewell = function () {
+        alert(this.name.first + ' has left the building. Bye for now!');
+      };
+      person1.farewell();
+      // 這時應該會看到警示訊息且內含了建構子所定義的人名。這樣很有用，但如果能動態更新整個繼承鍊，且從建構子分割出來的所有物件實例都能使用此新的函式，就會更有用！
+    </script>
+  </body>
+</html>

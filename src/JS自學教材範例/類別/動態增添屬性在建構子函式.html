@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function DOG(name) {
+        this.name = name;
+      }
+
+      DOG.prototype = { species: '犬科' };
+
+      var dogA = new DOG('大毛');
+
+      var dogB = new DOG('二毛');
+      alert(dogA.species); // 犬科
+      alert(dogB.species); // 犬科
+
+      //   species屬性放在prototype對象裡，是兩個實例對象共享的。只要修改了prototype對象，就會同時影響到兩個實例對象。
+      //   DOG.prototype.species = '貓科';
+      //   alert(dogA.species); // 貓科
+      //   alert(dogB.species); // 貓科
+    </script>
+  </body>
+</html>

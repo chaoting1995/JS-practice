@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 篩除重複的成員
+      let origin = [1, 1, 3, 3, 4, 'a', 'a', 'b'];
+      //---------------------------------------------------------
+
+      // 1. filter()+indexOf()
+      // function a(arr, r = 'result') {
+      //   if (r === 'result') {
+      //     return arr.filter((e, i) => {
+      //       return arr.indexOf(e) === i;
+      //     });
+      //   }
+      //   if (r === 'repeat') {
+      //     return arr.filter((e, i) => {
+      //       return arr.indexOf(e) !== i;
+      //     });
+      //   }
+      // }
+      //---------------------------------------------------------
+      // 2.Set()+forEach()+三元
+      function a(arr, r = 'result') {
+        const result = new Set();
+        const repeat = new Set();
+        arr.forEach((item) => {
+          result.has(item) ? repeat.add(item) : result.add(item);
+        });
+        return r === 'result' ? [...result] : [...repeat];
+      }
+
+      // const result1 = new Set(origin);
+      // console.log('result1 ', result1);
+      //---------------------------------------------------------
+
+      console.log('result:', a(origin));
+      console.log('repeat:', a(origin, 'repeat'));
+    </script>
+  </body>
+</html>

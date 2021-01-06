@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 【語法】str.split(“拆解基準“)
+      let str = 'Jan,Feb,Mar,Ap';
+      let arr = str.split(','); //["Jan", "Feb", "Mar"]
+      //以下錯誤示範
+      let arr = str.split(); //["Jan,Feb,Mar"]
+      let arr = str.split(''); //["J", "a", "n", ",", "F", "e", "b", ",", "M", "a", "r"]
+      // ．字串中的方法
+      // ．需設定拆解基準，通常是用逗號(",")
+    </script>
+  </body>
+</html>

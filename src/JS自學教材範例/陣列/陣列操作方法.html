@@ -546,8 +546,8 @@
 
       let c = Array.from(a, (e) => e + e);
       console.log(c); // ['aa','bb','cc','dd','ee']
-      //   類陣列物件寫法必須包含 length 屬性，且物件 key 須為 0 開始的數字，對應轉換後的元素索引。
 
+      //   類陣列物件寫法必須包含 length 屬性，且物件 key 須為 0 開始的數字，對應轉換後的元素索引。
       let a = {
         0: 14,
         2: 13,
@@ -559,6 +559,9 @@
       let b = Array.from(a);
       console.log(b); // [14,7,13,9,6]
 
+      //快速建立：元素數目為 x，內容為 [0, 1, ..., n-1]的陣列
+      let n = 14;
+      const counters = Array.from({ length: n }, (_, index) => index);
       //---------------------------------------------------------
 
       Array.of();

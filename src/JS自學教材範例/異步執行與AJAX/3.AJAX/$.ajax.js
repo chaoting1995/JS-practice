@@ -7,3 +7,13 @@ $.ajax({
     // 取得的遠端資料
   },
 });
+
+//----------------------------------------------------//
+
+$.ajax({
+  type: 'get',
+  url: 'https://httpbin.org/get',
+  success: (result) => {
+    console.log(result);
+  },
+});

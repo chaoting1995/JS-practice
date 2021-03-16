@@ -16,3 +16,16 @@ fetch(uri, { method: 'GET' })
   .then((result) => {
     console.log(result); // 得到「你的名字是：oxxo，年紀：18 歲。」
   });
+
+//----------------------------------------------//
+fetch('http://httpbin.org/ip')
+  .then(function (response) {
+    console.log(response);
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data); //{origin: "39.9.69.203"}
+  })
+  .catch(function (err) {
+    console.log(err);
+  });

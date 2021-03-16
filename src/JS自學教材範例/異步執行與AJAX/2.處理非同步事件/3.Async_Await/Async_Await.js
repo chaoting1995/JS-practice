@@ -102,3 +102,23 @@ async function getData3() {
   }
 }
 getData3();
+
+//-----------------------------------------------------//
+function myfunc(n) {
+  return new Promise((resolve, reject) => {
+    setTimeout(function () {
+      resolve(n * n);
+    }, Math.random() * 2000);
+  });
+}
+
+try {
+  (async () => {
+    const r1 = await myfunc(7);
+    console.log(r1);
+    const r2 = await myfunc(9);
+    console.log(r2);
+  })();
+} catch (ex) {
+  console.log(ex);
+}

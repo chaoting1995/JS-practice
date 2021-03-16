@@ -33,3 +33,24 @@ runPromise('小明', 3000)
   .then((jayString) => {
     console.log(jayString); // 杰倫 跑 2 秒時間(fulfilled)
   });
+
+//-------------------------------------------------------//
+
+const p1 = new Promise((resolve) => {
+  setTimeout(function () {
+    resolve('aaa');
+  }, Math.random() * 2000);
+});
+
+p1.then((r) => {
+  console.log(r);
+  return new Promise((resolve) => {
+    setTimeout(function () {
+      resolve('bbb');
+    }, Math.random() * 2000);
+  });
+}).then((r2) => {
+  console.log(r2);
+});
+
+console.log('--- 1 ---');

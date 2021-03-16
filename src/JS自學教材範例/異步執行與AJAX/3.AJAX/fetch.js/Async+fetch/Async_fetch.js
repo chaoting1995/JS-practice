@@ -22,6 +22,7 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
 const postURL = (name, age) => {
   const uri =
     'https://script.google.com/macros/s/AKfycbxXH6aPsldTBeS41WRMnJEA5Xstc7cYMj6YimDO2Al7H6DkJZiz/exec';
+
   return fetch(uri, {
     method: 'POST',
     body: encodeURI(
@@ -49,5 +50,5 @@ postURL('tom', 18);
 
 // 最後那段 await 的程式碼，也可以改成 promise.all 的作法，就會先 fetch，然後再出現 hello 的文字，不過也因為 promise.all 無法保證其載入順序，就可能會發生 tom 在 oxxo 之前出現的狀況呦。
 
-await Promise.all([postURL('oxxo',18), postURL('tom',18)]);
-console.log('hello!!!');
+// await Promise.all([postURL('oxxo',18), postURL('tom',18)]);
+// console.log('hello!!!');
